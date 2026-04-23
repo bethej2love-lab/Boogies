@@ -1270,12 +1270,12 @@
 
   async function fetchBook(isbn) {
     if (bookCache[isbn]) return bookCache[isbn];
+    // Direct cover URL — no API call needed
+    const cover = `https://books.google.com/books/content?vid=ISBN${isbn}&printsec=frontcover&img=1&zoom=2&source=gbs_api`;
     try {
       const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
       const data = await res.json();
       const info = data.items?.[0]?.volumeInfo || {};
-      const cover = (info.imageLinks?.thumbnail || info.imageLinks?.smallThumbnail || '')
-        .replace('http:', 'https:').replace('zoom=1', 'zoom=3');
       const meta = {
         title: info.title || '',
         author: (info.authors || []).join(', '),
@@ -1285,7 +1285,9 @@
       };
       bookCache[isbn] = meta;
       return meta;
-    } catch { return {}; }
+    } catch {
+      return { cover, title: '', author: '', publisher: '', date: '' };
+    }
   }
 
   let booksRendered = false;
