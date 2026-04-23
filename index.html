@@ -206,6 +206,275 @@
       animation: up 0.5s 0.3s ease both;
     }
 
+
+
+    /* ─── BOOKS SHEET ─── */
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 4px 2px 24px;
+    }
+
+    .book-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .book-cover {
+      aspect-ratio: 3 / 4;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--card);
+      position: relative;
+    }
+
+    .book-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .book-cover-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      color: var(--mid);
+      text-align: center;
+      padding: 8px;
+      line-height: 1.4;
+    }
+
+    .book-title-small {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .book-author-small {
+      font-size: 0.62rem;
+      color: var(--mid);
+      margin-top: -2px;
+    }
+
+    /* book detail modal */
+    .book-detail {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 300;
+      display: flex;
+      align-items: flex-end;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+
+    .book-detail.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .book-detail-inner {
+      background: #fff;
+      border-radius: 24px 24px 0 0;
+      width: 100%;
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 28px 24px 48px;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .book-detail.active .book-detail-inner {
+      transform: translateY(0);
+    }
+
+    .book-detail-top {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .book-detail-cover {
+      width: 80px;
+      flex-shrink: 0;
+      aspect-ratio: 3/4;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--card);
+    }
+
+    .book-detail-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .book-detail-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-top: 2px;
+    }
+
+    .book-detail-title {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+
+    .book-detail-author {
+      font-size: 0.78rem;
+      color: var(--mid);
+    }
+
+    .book-detail-publisher {
+      font-size: 0.72rem;
+      color: var(--mid);
+      margin-top: 2px;
+    }
+
+    .book-comment {
+      font-size: 0.78rem;
+      color: #aaa;
+      line-height: 1.75;
+      font-style: italic;
+      border-left: 2px solid #e8e4e0;
+      padding-left: 12px;
+      margin-top: 4px;
+    }
+
+    .book-detail-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--mid);
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* ─── FLIP CARDS ─── */
+    .sheet-month-scroll {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--divider);
+      flex-shrink: 0;
+    }
+
+    .month-strip {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .month-strip::-webkit-scrollbar { display: none; }
+
+    .month-btn {
+      flex-shrink: 0;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--divider);
+      background: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--mid);
+      cursor: pointer;
+      transition: all 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .month-btn.active {
+      background: var(--br);
+      color: #fff;
+      border-color: var(--br);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 4px 2px 16px;
+    }
+
+    .card-empty-state {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 200px;
+      font-size: 0.8rem;
+      color: var(--mid);
+    }
+
+    .flip-card {
+      aspect-ratio: 55 / 85;
+      perspective: 800px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .flip-inner {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 10px;
+    }
+
+    .flip-card.flipped .flip-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-front, .flip-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      background: var(--card);
+    }
+
+    .flip-front img, .flip-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .flip-back {
+      transform: rotateY(180deg);
+    }
+
+    .card-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--card);
+    }
+
     /* ─── BOTTOM SHEET ─── */
     .sheet-overlay {
       position: fixed;
@@ -280,19 +549,37 @@
 
     /* diary grid */
     .diary-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+
+    .diary-grid::-webkit-scrollbar { display: none; }
+
+    .year-break {
+      display: none;
+    }
+
+    .diary-item {
+      flex-shrink: 0;
+      width: 120px;
+      scroll-snap-align: start;
     }
 
     .diary-item { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
 
     .diary-thumb {
-      aspect-ratio: 210 / 297; /* A4 */
+      width: 120px;
+      height: 170px;
       background: var(--card);
       border-radius: 8px;
       overflow: hidden;
       transition: transform 0.15s;
+      flex-shrink: 0;
     }
 
     .diary-thumb img {
@@ -303,16 +590,6 @@
     }
 
     .diary-item:active .diary-thumb { transform: scale(0.96); }
-
-    .year-break {
-      grid-column: 1 / -1;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.68rem;
-      color: rgba(92,42,20,0.35);
-      letter-spacing: 0.1em;
-      padding: 8px 0 2px;
-    }
 
     .diary-label {
       font-size: 0.62rem;
@@ -375,7 +652,7 @@
   <div class="section">
 
     <div class="spread">
-      <div class="page-books">
+      <div class="page-books" onclick="openBooksSheet()" style="cursor:pointer">
         <div class="page-num">01</div>
         <div class="page-cat">Books</div>
       </div>
@@ -463,7 +740,6 @@
       <div class="diary-item" onclick="openViewer('diary/2026-01.png')"><div class="diary-thumb"><img src="diary/2026-01.png" alt="2026-01"></div></div>
       <div class="diary-item" onclick="openViewer('diary/2026-02.png')"><div class="diary-thumb"><img src="diary/2026-02.png" alt="2026-02"></div></div>
       <div class="diary-item" onclick="openViewer('diary/2026-03.png')"><div class="diary-thumb"><img src="diary/2026-03.png" alt="2026-03"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2026-04.png')"><div class="diary-thumb"><img src="diary/2026-04.png" alt="2026-04"></div></div>
     </div>
   </div>
 </div>
@@ -475,47 +751,493 @@
 </div>
 
 
+
+<!-- BOOKS SHEET -->
+<div class="sheet-overlay" id="books-overlay" onclick="closeBooksSheet()"></div>
+<div class="sheet" id="books-sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-header">
+    <div class="sheet-title">Books</div>
+    <div class="sheet-sub">Boogies 추천 도서</div>
+  </div>
+  <div class="sheet-body">
+    <div class="book-grid" id="book-grid">
+      <!-- JS로 채워짐 -->
+    </div>
+  </div>
+</div>
+
+<!-- BOOK DETAIL -->
+<div class="book-detail" id="book-detail" onclick="closeBookDetail()">
+  <div class="book-detail-inner" onclick="event.stopPropagation()">
+    <div class="book-detail-top">
+      <div class="book-detail-cover"><img id="detail-cover" src="" alt=""></div>
+      <div class="book-detail-meta">
+        <div class="book-detail-title" id="detail-title"></div>
+        <div class="book-detail-author" id="detail-author"></div>
+        <div class="book-detail-publisher" id="detail-publisher"></div>
+      </div>
+    </div>
+    <div id="detail-comment-wrap" style="display:none">
+      <div class="book-comment" id="detail-comment"></div>
+    </div>
+  </div>
+</div>
+
 <!-- PHOTO DIARY SHEET -->
 <div class="sheet-overlay" id="photo-overlay" onclick="closePhotoSheet()"></div>
 <div class="sheet" id="photo-sheet">
   <div class="sheet-handle"></div>
   <div class="sheet-header">
     <div class="sheet-title">Boogies Photo Diary Club</div>
-    <div class="sheet-sub">2024.02 —</div>
+    <div class="sheet-sub">2024.05 —</div>
   </div>
-  <div class="sheet-body">
-    <div class="diary-grid">
-      <div class="year-break">2024</div>
-      <div class="diary-item" onclick="openViewer('diary/2024-02.png')"><div class="diary-thumb"><img src="diary/2024-02.png" alt="2024-02"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2024-03.png')"><div class="diary-thumb"><img src="diary/2024-03.png" alt="2024-03"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2024-04.png')"><div class="diary-thumb"><img src="diary/2024-04.png" alt="2024-04"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2024-05.png')"><div class="diary-thumb"><img src="diary/2024-05.png" alt="2024-05"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2024-06.png')"><div class="diary-thumb"><img src="diary/2024-06.png" alt="2024-06"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2024-07.png')"><div class="diary-thumb"><img src="diary/2024-07.png" alt="2024-07"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2024-08.png')"><div class="diary-thumb"><img src="diary/2024-08.png" alt="2024-08"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2024-09.png')"><div class="diary-thumb"><img src="diary/2024-09.png" alt="2024-09"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2024-10.png')"><div class="diary-thumb"><img src="diary/2024-10.png" alt="2024-10"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2024-11.png')"><div class="diary-thumb"><img src="diary/2024-11.png" alt="2024-11"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2024-12.png')"><div class="diary-thumb"><img src="diary/2024-12.png" alt="2024-12"></div></div>
-      <div class="year-break">2025</div>
-      <div class="diary-item" onclick="openViewer('diary/2025-01.png')"><div class="diary-thumb"><img src="diary/2025-01.png" alt="2025-01"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2025-02.png')"><div class="diary-thumb"><img src="diary/2025-02.png" alt="2025-02"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2025-03.png')"><div class="diary-thumb"><img src="diary/2025-03.png" alt="2025-03"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2025-04.png')"><div class="diary-thumb"><img src="diary/2025-04.png" alt="2025-04"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2025-05.png')"><div class="diary-thumb"><img src="diary/2025-05.png" alt="2025-05"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2025-06.png')"><div class="diary-thumb"><img src="diary/2025-06.png" alt="2025-06"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2025-07.png')"><div class="diary-thumb"><img src="diary/2025-07.png" alt="2025-07"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2025-08.png')"><div class="diary-thumb"><img src="diary/2025-08.png" alt="2025-08"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2025-09.png')"><div class="diary-thumb"><img src="diary/2025-09.png" alt="2025-09"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2025-10.png')"><div class="diary-thumb"><img src="diary/2025-10.png" alt="2025-10"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2025-11.png')"><div class="diary-thumb"><img src="diary/2025-11.png" alt="2025-11"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2025-12.png')"><div class="diary-thumb"><img src="diary/2025-12.png" alt="2025-12"></div></div>
-      <div class="year-break">2026</div>
-      <div class="diary-item" onclick="openViewer('diary/2026-01.png')"><div class="diary-thumb"><img src="diary/2026-01.png" alt="2026-01"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2026-02.png')"><div class="diary-thumb"><img src="diary/2026-02.png" alt="2026-02"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2026-03.png')"><div class="diary-thumb"><img src="diary/2026-03.png" alt="2026-03"></div></div>
-      <div class="diary-item" onclick="openViewer('diary/2026-04.png')"><div class="diary-thumb"><img src="diary/2026-04.png" alt="2026-04"></div></div>
+  <div class="sheet-month-scroll">
+    <div class="month-strip">
+        <button class="month-btn" data-key="2024-05" onclick="selectMonth('2024-05')">2024.05</button>
+        <button class="month-btn" data-key="2024-06" onclick="selectMonth('2024-06')">2024.06</button>
+        <button class="month-btn" data-key="2024-07" onclick="selectMonth('2024-07')">2024.07</button>
+        <button class="month-btn" data-key="2024-08" onclick="selectMonth('2024-08')">2024.08</button>
+        <button class="month-btn" data-key="2024-09" onclick="selectMonth('2024-09')">2024.09</button>
+        <button class="month-btn" data-key="2024-10" onclick="selectMonth('2024-10')">2024.10</button>
+        <button class="month-btn" data-key="2024-11" onclick="selectMonth('2024-11')">2024.11</button>
+        <button class="month-btn" data-key="2024-12" onclick="selectMonth('2024-12')">2024.12</button>
+        <button class="month-btn" data-key="2025-01" onclick="selectMonth('2025-01')">2025.01</button>
+        <button class="month-btn" data-key="2025-02" onclick="selectMonth('2025-02')">2025.02</button>
+        <button class="month-btn" data-key="2025-03" onclick="selectMonth('2025-03')">2025.03</button>
+        <button class="month-btn" data-key="2025-04" onclick="selectMonth('2025-04')">2025.04</button>
+        <button class="month-btn" data-key="2025-05" onclick="selectMonth('2025-05')">2025.05</button>
+        <button class="month-btn" data-key="2025-06" onclick="selectMonth('2025-06')">2025.06</button>
+        <button class="month-btn" data-key="2025-07" onclick="selectMonth('2025-07')">2025.07</button>
+        <button class="month-btn" data-key="2025-08" onclick="selectMonth('2025-08')">2025.08</button>
+        <button class="month-btn" data-key="2025-09" onclick="selectMonth('2025-09')">2025.09</button>
+        <button class="month-btn" data-key="2025-10" onclick="selectMonth('2025-10')">2025.10</button>
+        <button class="month-btn" data-key="2025-11" onclick="selectMonth('2025-11')">2025.11</button>
+        <button class="month-btn" data-key="2025-12" onclick="selectMonth('2025-12')">2025.12</button>
+        <button class="month-btn" data-key="2026-01" onclick="selectMonth('2026-01')">2026.01</button>
+        <button class="month-btn" data-key="2026-02" onclick="selectMonth('2026-02')">2026.02</button>
+        <button class="month-btn" data-key="2026-03" onclick="selectMonth('2026-03')">2026.03</button>
     </div>
+  </div>
+  <div class="sheet-body" id="photo-body">
+    <div class="card-empty-state">월을 선택하세요</div>
+    <div class="card-grid" id="grid-2024-05" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-01.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-03.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-05.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-07.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-09.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-11.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-13.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-15.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-17.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-19.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-21.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-23.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-25.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-27.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-29.png" alt=""></div><div class="flip-back"><img src="photo/2024-05-30.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-31.png" alt=""></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+<div class="flip-card cover-only"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-05-cover.png" alt="cover"></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+</div>
+<div class="card-grid" id="grid-2024-06" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-01.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-03.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-05.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-07.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-09.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-11.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-13.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-15.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-17.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-19.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-21.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-23.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-25.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-27.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-06-29.png" alt=""></div><div class="flip-back"><img src="photo/2024-06-30.png" alt=""></div></div></div>
+</div>
+<div class="card-grid" id="grid-2024-07" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-01.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-03.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-05.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-07.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-09.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-11.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-13.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-15.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-17.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-19.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-21.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-23.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-25.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-27.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-29.png" alt=""></div><div class="flip-back"><img src="photo/2024-07-30.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-31.png" alt=""></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+<div class="flip-card cover-only"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-07-cover.png" alt="cover"></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+</div>
+<div class="card-grid" id="grid-2024-08" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-01.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-03.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-05.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-07.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-09.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-11.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-13.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-15.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-17.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-19.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-21.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-23.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-25.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-27.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-29.png" alt=""></div><div class="flip-back"><img src="photo/2024-08-30.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-31.png" alt=""></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+<div class="flip-card cover-only"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-08-cover.png" alt="cover"></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+</div>
+<div class="card-grid" id="grid-2024-09" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-01.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-03.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-05.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-07.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-09.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-11.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-13.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-15.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-17.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-19.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-21.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-23.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-25.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-27.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-09-29.png" alt=""></div><div class="flip-back"><img src="photo/2024-09-30.png" alt=""></div></div></div>
+</div>
+<div class="card-grid" id="grid-2024-10" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-01.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-03.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-05.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-07.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-09.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-11.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-13.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-15.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-17.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-19.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-21.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-23.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-25.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-27.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-29.png" alt=""></div><div class="flip-back"><img src="photo/2024-10-30.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-31.png" alt=""></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+<div class="flip-card cover-only"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-10-cover.png" alt="cover"></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+</div>
+<div class="card-grid" id="grid-2024-11" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-01.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-03.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-05.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-07.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-09.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-11.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-13.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-15.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-17.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-19.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-21.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-23.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-25.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-27.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-11-29.png" alt=""></div><div class="flip-back"><img src="photo/2024-11-30.png" alt=""></div></div></div>
+</div>
+<div class="card-grid" id="grid-2024-12" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-01.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-03.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-05.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-07.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-09.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-11.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-13.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-15.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-17.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-19.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-21.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-23.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-25.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-27.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-29.png" alt=""></div><div class="flip-back"><img src="photo/2024-12-30.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-31.png" alt=""></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+<div class="flip-card cover-only"><div class="flip-inner"><div class="flip-front"><img src="photo/2024-12-cover.png" alt="cover"></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+</div>
+<div class="card-grid" id="grid-2025-01" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-01.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-03.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-05.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-07.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-09.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-11.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-13.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-15.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-17.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-19.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-21.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-23.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-25.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-27.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-29.png" alt=""></div><div class="flip-back"><img src="photo/2025-01-30.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-31.png" alt=""></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+<div class="flip-card cover-only"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-01-cover.png" alt="cover"></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+</div>
+<div class="card-grid" id="grid-2025-02" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-02-01.png" alt=""></div><div class="flip-back"><img src="photo/2025-02-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-02-03.png" alt=""></div><div class="flip-back"><img src="photo/2025-02-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-02-05.png" alt=""></div><div class="flip-back"><img src="photo/2025-02-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-02-07.png" alt=""></div><div class="flip-back"><img src="photo/2025-02-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-02-09.png" alt=""></div><div class="flip-back"><img src="photo/2025-02-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-02-11.png" alt=""></div><div class="flip-back"><img src="photo/2025-02-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-02-13.png" alt=""></div><div class="flip-back"><img src="photo/2025-02-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-02-15.png" alt=""></div><div class="flip-back"><img src="photo/2025-02-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-02-17.png" alt=""></div><div class="flip-back"><img src="photo/2025-02-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-02-19.png" alt=""></div><div class="flip-back"><img src="photo/2025-02-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-02-21.png" alt=""></div><div class="flip-back"><img src="photo/2025-02-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-02-23.png" alt=""></div><div class="flip-back"><img src="photo/2025-02-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-02-25.png" alt=""></div><div class="flip-back"><img src="photo/2025-02-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-02-27.png" alt=""></div><div class="flip-back"><img src="photo/2025-02-28.png" alt=""></div></div></div>
+</div>
+<div class="card-grid" id="grid-2025-03" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-01.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-03.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-05.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-07.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-09.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-11.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-13.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-15.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-17.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-19.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-21.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-23.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-25.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-27.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-29.png" alt=""></div><div class="flip-back"><img src="photo/2025-03-30.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-31.png" alt=""></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+<div class="flip-card cover-only"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-03-cover.png" alt="cover"></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+</div>
+<div class="card-grid" id="grid-2025-04" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-01.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-03.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-05.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-07.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-09.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-11.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-13.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-15.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-17.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-19.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-21.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-23.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-25.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-27.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-04-29.png" alt=""></div><div class="flip-back"><img src="photo/2025-04-30.png" alt=""></div></div></div>
+</div>
+<div class="card-grid" id="grid-2025-05" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-01.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-03.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-05.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-07.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-09.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-11.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-13.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-15.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-17.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-19.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-21.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-23.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-25.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-27.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-29.png" alt=""></div><div class="flip-back"><img src="photo/2025-05-30.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-31.png" alt=""></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+<div class="flip-card cover-only"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-05-cover.png" alt="cover"></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+</div>
+<div class="card-grid" id="grid-2025-06" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-01.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-03.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-05.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-07.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-09.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-11.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-13.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-15.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-17.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-19.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-21.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-23.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-25.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-27.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-06-29.png" alt=""></div><div class="flip-back"><img src="photo/2025-06-30.png" alt=""></div></div></div>
+</div>
+<div class="card-grid" id="grid-2025-07" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-01.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-03.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-05.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-07.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-09.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-11.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-13.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-15.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-17.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-19.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-21.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-23.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-25.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-27.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-29.png" alt=""></div><div class="flip-back"><img src="photo/2025-07-30.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-31.png" alt=""></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+<div class="flip-card cover-only"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-07-cover.png" alt="cover"></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+</div>
+<div class="card-grid" id="grid-2025-08" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-01.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-03.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-05.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-07.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-09.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-11.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-13.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-15.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-17.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-19.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-21.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-23.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-25.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-27.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-29.png" alt=""></div><div class="flip-back"><img src="photo/2025-08-30.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-31.png" alt=""></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+<div class="flip-card cover-only"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-08-cover.png" alt="cover"></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+</div>
+<div class="card-grid" id="grid-2025-09" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-01.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-03.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-05.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-07.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-09.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-11.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-13.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-15.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-17.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-19.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-21.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-23.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-25.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-27.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-09-29.png" alt=""></div><div class="flip-back"><img src="photo/2025-09-30.png" alt=""></div></div></div>
+</div>
+<div class="card-grid" id="grid-2025-10" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-01.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-03.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-05.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-07.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-09.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-11.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-13.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-15.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-17.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-19.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-21.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-23.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-25.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-27.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-29.png" alt=""></div><div class="flip-back"><img src="photo/2025-10-30.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-31.png" alt=""></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+<div class="flip-card cover-only"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-10-cover.png" alt="cover"></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+</div>
+<div class="card-grid" id="grid-2025-11" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-01.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-03.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-05.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-07.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-09.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-11.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-13.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-15.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-17.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-19.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-21.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-23.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-25.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-27.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-11-29.png" alt=""></div><div class="flip-back"><img src="photo/2025-11-30.png" alt=""></div></div></div>
+</div>
+<div class="card-grid" id="grid-2025-12" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-01.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-03.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-05.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-07.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-09.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-11.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-13.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-15.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-17.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-19.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-21.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-23.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-25.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-27.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-29.png" alt=""></div><div class="flip-back"><img src="photo/2025-12-30.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-31.png" alt=""></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+<div class="flip-card cover-only"><div class="flip-inner"><div class="flip-front"><img src="photo/2025-12-cover.png" alt="cover"></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+</div>
+<div class="card-grid" id="grid-2026-01" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-01.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-03.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-05.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-07.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-09.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-11.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-13.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-15.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-17.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-19.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-21.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-23.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-25.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-27.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-29.png" alt=""></div><div class="flip-back"><img src="photo/2026-01-30.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-31.png" alt=""></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+<div class="flip-card cover-only"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-01-cover.png" alt="cover"></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+</div>
+<div class="card-grid" id="grid-2026-02" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-02-01.png" alt=""></div><div class="flip-back"><img src="photo/2026-02-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-02-03.png" alt=""></div><div class="flip-back"><img src="photo/2026-02-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-02-05.png" alt=""></div><div class="flip-back"><img src="photo/2026-02-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-02-07.png" alt=""></div><div class="flip-back"><img src="photo/2026-02-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-02-09.png" alt=""></div><div class="flip-back"><img src="photo/2026-02-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-02-11.png" alt=""></div><div class="flip-back"><img src="photo/2026-02-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-02-13.png" alt=""></div><div class="flip-back"><img src="photo/2026-02-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-02-15.png" alt=""></div><div class="flip-back"><img src="photo/2026-02-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-02-17.png" alt=""></div><div class="flip-back"><img src="photo/2026-02-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-02-19.png" alt=""></div><div class="flip-back"><img src="photo/2026-02-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-02-21.png" alt=""></div><div class="flip-back"><img src="photo/2026-02-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-02-23.png" alt=""></div><div class="flip-back"><img src="photo/2026-02-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-02-25.png" alt=""></div><div class="flip-back"><img src="photo/2026-02-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-02-27.png" alt=""></div><div class="flip-back"><img src="photo/2026-02-28.png" alt=""></div></div></div>
+</div>
+<div class="card-grid" id="grid-2026-03" style="display:none">
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-01.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-02.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-03.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-04.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-05.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-06.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-07.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-08.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-09.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-10.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-11.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-12.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-13.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-14.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-15.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-16.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-17.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-18.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-19.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-20.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-21.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-22.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-23.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-24.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-25.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-26.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-27.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-28.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-29.png" alt=""></div><div class="flip-back"><img src="photo/2026-03-30.png" alt=""></div></div></div>
+<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-31.png" alt=""></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+<div class="flip-card cover-only"><div class="flip-inner"><div class="flip-front"><img src="photo/2026-03-cover.png" alt="cover"></div><div class="flip-back"><div class="card-placeholder"></div></div></div></div>
+</div>
   </div>
 </div>
 
@@ -530,6 +1252,108 @@
     document.getElementById('sheet').classList.remove('active');
     document.getElementById('overlay').classList.remove('active');
     document.body.style.overflow = '';
+  }
+
+
+  // ── BOOKS DATA ──
+  // 책 추가: { isbn: 'ISBN13', comment: '코멘트(선택)' }
+  const BOOKS = [
+    { isbn: '9788936434120', comment: '조용하지만 강렬하게 밀려오는 소설. 읽고 나서 한동안 멍했어요.' },
+    { isbn: '9788954651929', comment: '문장 하나하나가 시처럼 느껴졌어요.' },
+    { isbn: '9788932473154', comment: '나의 이야기이기도 했고, 주변 모든 사람의 이야기이기도 했어요.' },
+    { isbn: '9788901270777', comment: '감정을 모른다는 것이 이런 의미일 수 있겠구나.' },
+    { isbn: '9788965745754', comment: 'SF인데 따뜻해요. 이상한 조합인데 이 작가만 할 수 있어요.' },
+    { isbn: '9788936352981', comment: '읽는 내내 마음이 무거웠지만, 꼭 읽어야 하는 책이라고 생각해요.' },
+  ];
+
+  const bookCache = {};
+
+  async function fetchBook(isbn) {
+    if (bookCache[isbn]) return bookCache[isbn];
+    try {
+      const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
+      const data = await res.json();
+      const info = data.items?.[0]?.volumeInfo || {};
+      const cover = (info.imageLinks?.thumbnail || info.imageLinks?.smallThumbnail || '')
+        .replace('http:', 'https:').replace('zoom=1', 'zoom=3');
+      const meta = {
+        title: info.title || '',
+        author: (info.authors || []).join(', '),
+        publisher: info.publisher || '',
+        date: info.publishedDate?.slice(0, 7) || '',
+        cover,
+      };
+      bookCache[isbn] = meta;
+      return meta;
+    } catch { return {}; }
+  }
+
+  let booksRendered = false;
+
+  async function renderBooks() {
+    if (booksRendered) return;
+    booksRendered = true;
+    const grid = document.getElementById('book-grid');
+    grid.innerHTML = BOOKS.map((b, i) => `
+      <div class="book-item" onclick="openBookDetail(${i})">
+        <div class="book-cover" id="cover-${i}">
+          <div class="book-cover-placeholder">—</div>
+        </div>
+      </div>
+    `).join('');
+
+    BOOKS.forEach(async (b, i) => {
+      const meta = await fetchBook(b.isbn);
+      const el = document.getElementById(`cover-${i}`);
+      if (el && meta.cover) {
+        el.innerHTML = `<img src="${meta.cover}" alt="">`;
+      }
+    });
+  }
+
+  function openBooksSheet() {
+    document.getElementById('books-sheet').classList.add('active');
+    document.getElementById('books-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    renderBooks();
+  }
+
+  function closeBooksSheet() {
+    document.getElementById('books-sheet').classList.remove('active');
+    document.getElementById('books-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  async function openBookDetail(i) {
+    const b = BOOKS[i];
+    const meta = await fetchBook(b.isbn);
+    document.getElementById('detail-cover').src = meta.cover || '';
+    document.getElementById('detail-title').textContent = meta.title;
+    document.getElementById('detail-author').textContent = meta.author;
+    document.getElementById('detail-publisher').textContent =
+      [meta.publisher, meta.date].filter(Boolean).join(' · ');
+    const commentWrap = document.getElementById('detail-comment-wrap');
+    if (b.comment) {
+      commentWrap.style.display = 'block';
+      document.getElementById('detail-comment').textContent = b.comment;
+    } else {
+      commentWrap.style.display = 'none';
+    }
+    document.getElementById('book-detail').classList.add('active');
+  }
+
+  function closeBookDetail() {
+    document.getElementById('book-detail').classList.remove('active');
+  }
+
+  function selectMonth(key) {
+    document.querySelectorAll('.card-grid').forEach(g => g.style.display = 'none');
+    document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
+    const grid = document.getElementById('grid-' + key);
+    if (grid) grid.style.display = 'flex';
+    const emptyState = document.querySelector('.card-empty-state');
+    if (emptyState) emptyState.style.display = 'none';
+    document.querySelector(`.month-btn[data-key="${key}"]`).classList.add('active');
   }
 
   function openPhotoSheet() {
