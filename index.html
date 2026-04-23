@@ -1257,21 +1257,22 @@
 
   // ── BOOKS DATA ──
   // 책 추가: { isbn: 'ISBN13', comment: '코멘트(선택)' }
+  // 책 추가 방법:
+  // { isbn: 'ISBN13', img: 'books/파일명.jpg', comment: '코멘트(선택)' }
   const BOOKS = [
-    { isbn: '9788936434120', comment: '조용하지만 강렬하게 밀려오는 소설. 읽고 나서 한동안 멍했어요.' },
-    { isbn: '9788954651929', comment: '문장 하나하나가 시처럼 느껴졌어요.' },
-    { isbn: '9788932473154', comment: '나의 이야기이기도 했고, 주변 모든 사람의 이야기이기도 했어요.' },
-    { isbn: '9788901270777', comment: '감정을 모른다는 것이 이런 의미일 수 있겠구나.' },
-    { isbn: '9788965745754', comment: 'SF인데 따뜻해요. 이상한 조합인데 이 작가만 할 수 있어요.' },
-    { isbn: '9788936352981', comment: '읽는 내내 마음이 무거웠지만, 꼭 읽어야 하는 책이라고 생각해요.' },
+    { isbn: '9788936434120', img: 'books/채식주의자.jpg', comment: '조용하지만 강렬하게 밀려오는 소설. 읽고 나서 한동안 멍했어요.' },
+    { isbn: '9788954651929', img: 'books/흰.jpg', comment: '문장 하나하나가 시처럼 느껴졌어요.' },
+    { isbn: '9788932473154', img: 'books/82년생김지영.jpg', comment: '나의 이야기이기도 했고, 주변 모든 사람의 이야기이기도 했어요.' },
+    { isbn: '9788901270777', img: 'books/아몬드.jpg', comment: '감정을 모른다는 것이 이런 의미일 수 있겠구나.' },
+    { isbn: '9788965745754', img: 'books/지구끝의온실.jpg', comment: 'SF인데 따뜻해요. 이상한 조합인데 이 작가만 할 수 있어요.' },
+    { isbn: '9788936352981', img: 'books/소년이온다.jpg', comment: '읽는 내내 마음이 무거웠지만, 꼭 읽어야 하는 책이라고 생각해요.' },
   ];
 
   const bookCache = {};
 
-  async function fetchBook(isbn) {
-    if (bookCache[isbn]) return bookCache[isbn];
-    // Direct cover URL — no API call needed
-    const cover = `https://books.google.com/books/content?vid=ISBN${isbn}&printsec=frontcover&img=1&zoom=2&source=gbs_api`;
+  async function fetchBook(b) {
+    const isbn = b.isbn;
+    if (bookCache[isbn]) return { ...bookCache[isbn], img: b.img, comment: b.comment };
     try {
       const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
       const data = await res.json();
@@ -1281,12 +1282,11 @@
         author: (info.authors || []).join(', '),
         publisher: info.publisher || '',
         date: info.publishedDate?.slice(0, 7) || '',
-        cover,
       };
       bookCache[isbn] = meta;
-      return meta;
+      return { ...meta, img: b.img, comment: b.comment };
     } catch {
-      return { cover, title: '', author: '', publisher: '', date: '' };
+      return { title: '', author: '', publisher: '', date: '', img: b.img, comment: b.comment };
     }
   }
 
@@ -1298,19 +1298,12 @@
     const grid = document.getElementById('book-grid');
     grid.innerHTML = BOOKS.map((b, i) => `
       <div class="book-item" onclick="openBookDetail(${i})">
-        <div class="book-cover" id="cover-${i}">
-          <div class="book-cover-placeholder">—</div>
+        <div class="book-cover">
+          <img src="${b.img}" alt=""
+            onerror="this.style.display='none'">
         </div>
       </div>
     `).join('');
-
-    BOOKS.forEach(async (b, i) => {
-      const meta = await fetchBook(b.isbn);
-      const el = document.getElementById(`cover-${i}`);
-      if (el && meta.cover) {
-        el.innerHTML = `<img src="${meta.cover}" alt="">`;
-      }
-    });
   }
 
   function openBooksSheet() {
@@ -1328,8 +1321,8 @@
 
   async function openBookDetail(i) {
     const b = BOOKS[i];
-    const meta = await fetchBook(b.isbn);
-    document.getElementById('detail-cover').src = meta.cover || '';
+    const meta = await fetchBook(b);
+    document.getElementById('detail-cover').src = b.img || '';
     document.getElementById('detail-title').textContent = meta.title;
     document.getElementById('detail-author').textContent = meta.author;
     document.getElementById('detail-publisher').textContent =
